@@ -22,6 +22,7 @@
     document.getElementById("submit").addEventListener("click", function () {
         const startTime = performance.now();
 
+        const casVal = cas.checked;
         const inputVal = input.value.split("\n");
         const inputLen = inputVal.length;
 
@@ -48,7 +49,7 @@
         const unique = inputVal.filter(function (item) {
             if (item === "") return true;
             else {
-                if (cas)
+                if (casVal)
                     return hash.hasOwnProperty(item)
                         ? false
                         : (hash[item] = true);
