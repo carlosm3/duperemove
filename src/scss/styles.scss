@@ -114,7 +114,7 @@ textarea {
 
 #elapsed-time {
     position: relative;
-    top: -2.25rem;
+    top: -1.25rem;
     right: 1.5rem;
     color: #999999;
     font-weight: $light;
@@ -129,7 +129,7 @@ textarea {
     line-height: 1.4;
     display: flex;
     align-items: center;
-    margin: 0.5rem 0;
+    margin: 0.75rem 0 0.5rem 0;
 }
 
 #check {
@@ -167,7 +167,7 @@ textarea {
 }
 
 // FOOTER
-#license {
+#author {
     color: rgb(155, 155, 155);
     color: rgb(122, 122, 122);
     text-align: center;
