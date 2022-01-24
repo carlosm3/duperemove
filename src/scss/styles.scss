@@ -1,0 +1,192 @@
+@import "reset";
+
+// COLOR PALETTE
+$primary: #3061a7;
+$primary-hover: #29538e;
+$secondary: rgb(80, 80, 80);
+$textarea: #F5F5F5;
+
+// TYPOGRAPHY
+$fc: #333;
+$light: 400;
+$regular: 500;
+$bold: 700;
+$ff: 'Inter', sans-serif;
+
+h1 {
+    font-size: 2.25rem;
+    text-align: center;
+    padding: 1rem 0 1rem 0;
+    letter-spacing: -1px;
+    a {
+        font-weight: $bold;
+        color: #3F434A;
+        text-decoration: none;
+    }
+}
+
+p {
+    font-weight: $regular;
+}
+
+// GLOBAL
+body {
+    font-family: $ff;
+    font-size: 1rem;
+    color: $fc;
+}
+
+.container {
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.sr-only {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 0.75px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
+// HEADER
+header {
+    margin-bottom: 1.5rem;
+    p:nth-child(3) {
+        margin: 0.25rem 0;
+    }
+    p {
+        font-weight: $light;
+    }
+    #example {
+        font-weight: $regular;
+        display: inline-block;
+        color: $primary;
+    }
+    #example:hover {
+        cursor: pointer;
+        color: $primary-hover;
+    }
+}
+
+// MAIN
+button {
+    border: none;
+    border-radius: 3px;
+    background-color: $primary;
+    color: #fff;
+    padding: 0.25rem 1.75rem;
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+    &:hover {
+        cursor: pointer;
+        background-color: $primary-hover;
+    }
+}
+
+textarea {
+    width: 100%;
+    margin-top: 0.5rem;
+    min-height: 20vh;
+    height: 40vh;
+    resize: vertical;
+    font-size: 1rem;
+    border-radius: 3px;
+    border: 1px solid $primary;
+    padding: 0.4rem;
+    font-family: $ff;
+    background-color: $textarea;
+    &:focus {
+        outline: none !important;
+        border: 2px solid $primary-hover;
+        box-shadow: 0 0 8px #719ECE;
+    }
+}
+
+#output {
+    display: none;
+    margin-top: 1.5rem;
+    div {
+        padding-bottom: 2rem;
+    }
+}
+
+#elapsed-time {
+    position: relative;
+    top: -4.25rem;
+    right: 1.5rem;
+    color: #999999;
+    font-weight: $light;
+    font-size: 0.95rem;
+}
+
+.textarea-label {
+    font-weight: $regular;
+}
+
+#controls {
+    line-height: 1.4;
+    display: flex;
+    align-items: center;
+    margin-top: 0.25rem;
+}
+
+#drop {
+    margin-left: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    label {
+        display: block;
+    }
+    select {
+        width: 7rem;
+    }
+    option,
+    select {
+        font-size: 1rem;
+        color: $secondary;
+        text-align: center;
+    }
+}
+
+#summary,
+#elapsed-time {
+    text-align: right;
+    display: block;
+}
+
+// FOOTER
+#license {
+    color: rgb(155, 155, 155);
+    color: rgb(122, 122, 122);
+    text-align: center;
+    bottom: 0;
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+    a {
+        text-decoration: none;
+        color: #5badf0;
+        color: #4ba4ec;
+    }
+}
+
+// MEDIA QUERIES
+@media screen and (min-width: 800px) {
+    .container {
+        max-width: 1000px;
+    }
+
+    textarea {
+        height: 30vh;
+    }
+
+    #drop {
+        label {
+            display: inline;
+        }
+    }
+}
