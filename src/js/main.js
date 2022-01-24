@@ -4,7 +4,7 @@
     const cas = document.getElementById("case-sens");
     const outputDiv = document.getElementById("output");
 
-    cas.addEventListener("change", function (e) {
+    cas.addEventListener("change", function () {
         if (cas.checked) {
             transform.setAttribute("disabled", "disabled");
         } else {
@@ -93,6 +93,7 @@
 
         const outputLen = output.length;
         outputDiv.style.display = "block";
+        document.getElementById("license").scrollIntoView();
         document.getElementById("summary").style.display = "block";
         document.getElementById("original").textContent = inputLen.toString();
         document.getElementById("removed").textContent = (
