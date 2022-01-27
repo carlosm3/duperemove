@@ -93,7 +93,7 @@
 
         const outputLen = output.length;
         outputDiv.style.display = "block";
-        document.getElementById("license").scrollIntoView();
+        document.getElementById("author").scrollIntoView();
         document.getElementById("summary").style.display = "block";
         document.getElementById("original").textContent = inputLen.toString();
         document.getElementById("removed").textContent = (
@@ -101,10 +101,6 @@
         ).toString();
         document.getElementById("remaining").textContent = outputLen.toString();
         document.getElementById("textOutput").value = output.join("\n");
-        document.getElementById("time").textContent = (
-            performance.now() - startTime
-        )
-            .toString()
-            .substring(0, 4);
+        document.getElementById("time").textContent = ((performance.now() - startTime) / 1000).toFixed(3);
     });
 })();
