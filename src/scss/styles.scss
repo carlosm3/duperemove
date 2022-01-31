@@ -29,6 +29,9 @@ p {
     font-weight: $regular;
 }
 
+// VARIABLES
+$rad: 4px;
+
 // GLOBAL
 body {
     font-family: $ff;
@@ -76,7 +79,7 @@ header {
 // MAIN
 button {
     border: none;
-    border-radius: 3px;
+    border-radius: $rad;
     background-color: $primary;
     color: #fff;
     padding: 0.4rem 1.75rem;
@@ -92,18 +95,18 @@ textarea {
     width: 100%;
     margin-top: 0.5rem;
     min-height: 20vh;
-    height: 40vh;
+    height: 20rem;
     resize: vertical;
     font-size: 1rem;
-    border-radius: 3px;
-    border: 1px solid $primary;
+    border-radius: $rad;
+    border: 2px solid $primary;
     padding: 0.4rem;
     font-family: $ff;
     background-color: $textarea;
     &:focus {
         outline: none !important;
         border: 2px solid $primary-hover;
-        box-shadow: 0 0 8px #719ece;
+        box-shadow: 0 0 9px $primary;
     }
 }
 
