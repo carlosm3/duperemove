@@ -43,23 +43,22 @@ td, th {
 }
 
 h1 {
-  font-size: 2.25rem;
+  font-size: 2rem;
   text-align: center;
-  padding: 1rem 0 1rem 0;
-  letter-spacing: -1px;
+  padding: 0.5rem;
 }
 h1 a {
-  font-weight: 700;
-  color: #3f434a;
+  font-weight: 600;
+  color: #fff;
   text-decoration: none;
 }
 
 p {
-  font-weight: 500;
+  font-weight: 600;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
   font-size: 1rem;
   color: #333;
 }
@@ -90,9 +89,13 @@ header p:nth-child(3) {
 header p {
   font-weight: 400;
 }
+header .bar {
+  background-color: #3061A7;
+  margin-bottom: 1.5rem;
+}
 
 #example {
-  font-weight: 500;
+  font-weight: 600;
   display: inline-block;
   color: #3061a7;
 }
@@ -118,16 +121,16 @@ button:hover {
 
 textarea {
   width: 100%;
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
   min-height: 15rem;
   height: 15rem;
   resize: vertical;
-  font-size: 1rem;
+  font-size: 1.125rem;
   border-radius: 4px;
   border: 2px solid #3061a7;
   padding: 0.4rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background-color: #f5f5f5;
+  font-family: "Source Sans Pro", sans-serif;
+  background-color: #f5f5ffd0;
 }
 textarea:focus {
   outline: none !important;
@@ -149,7 +152,7 @@ textarea:focus {
 }
 
 .textarea-label {
-  font-weight: 500;
+  font-weight: 600;
 }
 
 #controls {
@@ -194,11 +197,13 @@ textarea:focus {
 }
 
 #author {
-  color: #9b9b9b;
   color: #7a7a7a;
   text-align: center;
   font-size: 0.8rem;
   margin: 2rem 0 1rem 0;
+}
+#author p, #author a {
+  font-weight: 500;
 }
 #author a {
   text-decoration: none;
@@ -222,8 +227,8 @@ textarea:focus {
     height: 30vh;
   }
 
-  h1 {
-    padding-top: 2rem;
+  div.bar {
+    margin-bottom: 2rem;
   }
 
   #output {
