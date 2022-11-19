@@ -1,10 +1,10 @@
 @import "reset";
 
 // COLOR PALETTE
-$primary: #3061a7;
+$primary: #304568;
 $primary-hover: #29538e;
 $secondary: rgb(80, 80, 80);
-$textarea: #f5f5ffd0;
+$textarea: #f5f5ff63;
 
 // TYPOGRAPHY
 $fc: #333;
@@ -64,7 +64,7 @@ header {
         font-weight: $light;
     }
     .bar {
-        background-color: #3061A7;
+        background-color: $primary;
         margin-bottom: 1.5rem;
     }
 }
@@ -114,7 +114,7 @@ textarea {
 
 #output {
     display: none;
-    margin-top: 1.5rem;
+    margin: 1.5rem 0;
 }
 
 #elapsed-time {
@@ -169,21 +169,6 @@ textarea {
 #elapsed-time {
     text-align: right;
     display: block;
-}
-
-// FOOTER
-#author {
-    color: rgb(122, 122, 122);
-    text-align: center;
-    font-size: 0.8rem;
-    margin: 2rem 0 1rem 0;
-    p, a {
-        font-weight: 500;
-    }
-    a {
-        text-decoration: none;
-        color: #4ba4ec;
-    }
 }
 
 // MEDIA QUERIES
