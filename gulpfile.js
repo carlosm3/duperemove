@@ -1,5 +1,4 @@
 const gulp = require("gulp");
-// const { src, series, dest } = require("gulp");
 const htmlmin = require("gulp-htmlmin");
 const cleanCSS = require("gulp-clean-css");
 const babel = require("gulp-babel");
