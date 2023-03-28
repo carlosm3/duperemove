@@ -1,110 +1,104 @@
 "use strict";
 
-const transform = document.getElementById("transform");
-const input = document.getElementById("textInput");
-const cas = document.getElementById("case-sens");
+// Get references to DOM elements
+const transformSelect = document.getElementById("transform");
+const inputTextArea = document.getElementById("textInput");
+const caseSensitiveCheckbox = document.getElementById("case-sens");
 const outputDiv = document.getElementById("output");
+const summaryDiv = document.getElementById("summary");
+const originalCountSpan = document.getElementById("original");
+const removedCountSpan = document.getElementById("removed");
+const remainingCountSpan = document.getElementById("remaining");
+const textOutputTextArea = document.getElementById("textOutput");
+const timeSpan = document.getElementById("time");
+const submitButton = document.getElementById("submit");
 
-cas.addEventListener("change", () => {
-    if (cas.checked) {
-        transform.disabled = true;
-        transform.value = "none";
-        transform.style.cursor = "not-allowed";
+// Disable or enable the 'Transform' dropdown based on the state of the 'Case Sensitive' checkbox
+caseSensitiveCheckbox.addEventListener("change", () => {
+    if (caseSensitiveCheckbox.checked) {
+        transformSelect.disabled = true;
+        transformSelect.value = "none";
+        transformSelect.style.cursor = "not-allowed";
     } else {
-        transform.removeAttribute("disabled");
-        transform.style.cursor = "pointer";
+        transformSelect.removeAttribute("disabled");
+        transformSelect.style.cursor = "pointer";
     }
 });
 
-transform.addEventListener("change", (e) => {
-    if (e.target.value !== "none") {
-        cas.setAttribute("disabled", "disabled");
+// Disable or enable the 'Case Sensitive' checkbox based on the state of the 'Transform' dropdown
+transformSelect.addEventListener("change", () => {
+    if (transformSelect.value !== "none") {
+        caseSensitiveCheckbox.setAttribute("disabled", "disabled");
     } else {
-        cas.removeAttribute("disabled");
+        caseSensitiveCheckbox.removeAttribute("disabled");
     }
 });
 
-document.getElementById("submit").addEventListener("click", () => {
+// When the 'Submit' button is clicked, process the input and display the output
+submitButton.addEventListener("click", () => {
+    // Record the start time of the function for performance analysis
     const startTime = performance.now();
 
-    const casVal = cas.checked;
-    const inputVal = input.value.split("\n");
-    const inputLen = inputVal.length;
+    // Get the current values of the input elements
+    const caseSensitive = caseSensitiveCheckbox.checked;
+    const inputLines = inputTextArea.value.split("\n");
+    const inputLineCount = inputLines.length;
 
+    // Transform input lines to uppercase or lowercase if the 'Transform' dropdown is set to a value other than 'None'
     if (document.getElementById("trim").checked) {
-        inputVal.forEach(function (elem, index) {
-            this[index] = elem.trim();
-        }, inputVal);
+        inputLines.forEach((line, index, lines) => {
+            lines[index] = line.trim();
+        });
     }
 
-    if (transform.value !== "none") {
-        if (transform.value === "upp") {
-            inputVal.forEach(function (elem, index) {
-                this[index] = elem.toUpperCase();
-            }, inputVal);
+    // Transform input lines to uppercase or lowercase if the 'Transform' dropdown is set to a value other than 'None'
+    if (transformSelect.value !== "none") {
+        const transformFn = (transformSelect.value === "upp") ? String.prototype.toUpperCase : String.prototype.toLowerCase;
+        inputLines.forEach((line, index, lines) => {
+            lines[index] = transformFn.call(line);
+        });
+    }
+
+    // Remove duplicate lines and generate a hash table of unique lines
+    const uniqueLines = {};
+    const filteredLines = inputLines.filter((line) => {
+        if (line === "") {
+            return true;
         } else {
-            inputVal.forEach(function (elem, index) {
-                this[index] = elem.toLowerCase();
-            }, inputVal);
-        }
-    }
-
-    const hash = {};
-
-    const unique = inputVal.filter(function (item) {
-        if (item === "") return true;
-        else {
-            if (casVal)
-                return hash.hasOwnProperty(item) ? false : (hash[item] = true);
-            else
-                return hash.hasOwnProperty(item.toLowerCase())
-                    ? false
-                    : (hash[item.toLowerCase()] = true);
+            const key = caseSensitive ? line : line.toLowerCase();
+            if (uniqueLines.hasOwnProperty(key)) {
+                return false;
+            } else {
+                uniqueLines[key] = true;
+                return true;
+            }
         }
     });
 
-    const sort = document.getElementById("sort").value;
-    if (sort !== "none") {
-        if (sort !== "rand") {
-            unique.sort();
-            if (sort === "desc") {
-                unique.reverse();
-            }
-        } else {
-            let index = unique.length,
-                randIndex;
-            while (index !== 0) {
-                randIndex = Math.floor(Math.random() * index);
-                index--;
-                [unique[index], unique[randIndex]] = [
-                    unique[randIndex],
-                    unique[index],
-                ];
+    // Sort the unique lines based on the selected sorting method
+    const sortOption = document.getElementById("sort").value;
+    if (sortOption !== "none") {
+        filteredLines.sort();
+        if (sortOption === "desc") {
+            filteredLines.reverse();
+        } else if (sortOption === "rand") {
+            for (let i = filteredLines.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [filteredLines[i], filteredLines[j]] = [filteredLines[j], filteredLines[i]];
             }
         }
     }
 
-    let output;
-    if (document.getElementById("blank").checked) {
-        output = unique.filter(function (item) {
-            if (item !== "") return true;
-        });
-    } else {
-        output = unique;
-    }
+    // Remove blank lines if the 'Remove Blank Lines' checkbox is selected
+    const outputLines = document.getElementById("blank").checked ? filteredLines.filter((line) => line !== "") : filteredLines;
 
-    const outputLen = output.length;
+    const outputLineCount = outputLines.length;
     outputDiv.style.display = "block";
     window.scrollTo(0, document.body.scrollHeight);
-    document.getElementById("summary").style.display = "block";
-    document.getElementById("original").textContent = inputLen.toString();
-    document.getElementById("removed").textContent = (
-        inputLen - outputLen
-    ).toString();
-    document.getElementById("remaining").textContent = outputLen.toString();
-    document.getElementById("textOutput").value = output.join("\n");
-    document.getElementById("time").textContent = (
-        (performance.now() - startTime) /
-        1000
-    ).toFixed(3);
+    summaryDiv.style.display = "block";
+    originalCountSpan.textContent = inputLineCount.toString();
+    removedCountSpan.textContent = (inputLineCount - outputLineCount).toString();
+    remainingCountSpan.textContent = outputLineCount.toString();
+    textOutputTextArea.value = outputLines.join("\n");
+    timeSpan.textContent = ((performance.now() - startTime) / 1000).toFixed(3);
 });
