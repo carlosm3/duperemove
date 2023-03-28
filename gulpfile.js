@@ -2,12 +2,15 @@ const gulp = require("gulp");
 const htmlmin = require("gulp-htmlmin");
 const cleanCSS = require("gulp-clean-css");
 const babel = require("gulp-babel");
-var uglify = require("gulp-uglify");
+const uglify = require("gulp-uglify");
+
+const srcFolder = "src/";
+const distFolder = "dist/";
 
 // Gulp Uglify JS
-gulp.task("compress", function () {
-    return gulp
-        .src("dist/js/*.js")
+const compress = () =>
+    gulp
+        .src(distFolder + "js/*.js")
         .pipe(
             uglify({
                 mangle: {
@@ -19,35 +22,30 @@ gulp.task("compress", function () {
                 },
             })
         )
-        .pipe(gulp.dest("dist/js"));
-});
+        .pipe(gulp.dest(distFolder + "js"));
 
 // Gulp Babel
-gulp.task("babel", () =>
+const babelTask = () =>
     gulp
-        .src("src/js/main.js")
-        .pipe(
-            babel({
-                presets: ["@babel/env"],
-            })
-        )
-        .pipe(gulp.dest("dist/js"))
-);
+        .src(srcFolder + "js/main.js")
+        .pipe(babel({ presets: ["@babel/env"] }))
+        .pipe(gulp.dest(distFolder + "js"));
 
 // Gulp Minify CSS
-gulp.task("minify-css", () => {
-    return gulp
-        .src("src/css/styles.css")
+const minifyCSS = () =>
+    gulp
+        .src(srcFolder + "css/styles.css")
         .pipe(cleanCSS({ compatibility: "ie8" }))
-        .pipe(gulp.dest("dist/css"));
-});
+        .pipe(gulp.dest(distFolder + "css"));
 
 // Gulp Minify HTML
-gulp.task("minify", () => {
-    return gulp
-        .src("src/*.html")
+const minifyHTML = () =>
+    gulp
+        .src(srcFolder + "*.html")
         .pipe(htmlmin({ collapseWhitespace: true }))
-        .pipe(gulp.dest("dist"));
-});
+        .pipe(gulp.dest(distFolder));
 
-gulp.task("default", gulp.series("babel", "compress", "minify-css", "minify"));
+gulp.task(
+    "default",
+    gulp.series(babelTask, compress, minifyCSS, minifyHTML)
+);
