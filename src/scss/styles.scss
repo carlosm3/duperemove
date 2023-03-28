@@ -4,7 +4,7 @@
 $primary: #304568;
 $primary-hover: #29538e;
 $secondary: rgb(80, 80, 80);
-$textarea: #f5f5ff63;
+$textarea: rgba(#f5f5ff, 0.39);
 
 // TYPOGRAPHY
 $fc: #333;
@@ -13,194 +13,204 @@ $regular: 600;
 $bold: 700;
 $ff: 'Source Sans Pro', sans-serif;
 
-h1 {
-    font-size: 2rem;
-    text-align: center;
-    padding: 0.5rem;
-    a {
-        font-weight: 600;
-        color: #fff;
-        text-decoration: none;
-    }
-}
-
-p {
-    font-weight: $regular;
-}
-
 // VARIABLES
 $rad: 4px;
 
 // GLOBAL
+$global-font-size: 1rem;
+$global-font-color: $fc;
+
 body {
-    font-family: $ff;
-    font-size: 1rem;
-    color: $fc;
+  font-family: $ff;
+  font-size: $global-font-size;
+  color: $global-font-color;
 }
 
 .container {
-    margin: 0 auto;
-    padding: 0 1rem;
-    max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  max-width: 1000px;
 }
 
 .sr-only {
-    clip: rect(0 0 0 0);
-    clip-path: inset(50%);
-    height: 0.75px;
-    overflow: hidden;
-    position: absolute;
-    white-space: nowrap;
-    width: 1px;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 0.75px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }
 
 // HEADER
 header {
-    margin-bottom: 1.5rem;
-    p:nth-child(3) {
-        margin: 0.25rem 0;
-    }
-    p {
-        font-weight: $light;
-    }
-    .bar {
-        background-color: $primary;
-        margin-bottom: 1.5rem;
-    }
-}
+  margin-bottom: 1.5rem;
 
-#example {
-    font-weight: $regular;
-    display: inline-block;
-    color: $primary;
-}
-#example:hover {
-    cursor: pointer;
-    color: $primary-hover;
-}
-
-// MAIN
-button {
-    border: none;
-    border-radius: $rad;
+  .bar {
     background-color: $primary;
-    color: #fff;
-    padding: 0.4rem 1.75rem;
-    font-size: 1.2rem;
-    margin-top: 0.5rem;
-    &:hover {
-        cursor: pointer;
-        background-color: $primary-hover;
+    margin-bottom: 1.5rem;
+  }
+
+  p {
+    font-weight: $light;
+    &:nth-child(3) {
+      margin: 0.25rem 0;
     }
+  }
+}
+
+// TYPOGRAPHY
+h1 {
+  font-size: 2rem;
+  text-align: center;
+  padding: 0.5rem;
+
+  a {
+    font-weight: $bold;
+    color: #fff;
+    text-decoration: none;
+  }
+}
+
+p {
+  font-weight: $regular;
+}
+
+button {
+  border: none;
+  border-radius: $rad;
+  background-color: $primary;
+  color: #fff;
+  padding: 0.4rem 1.75rem;
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $primary-hover;
+  }
 }
 
 textarea {
-    width: 100%;
-    margin-top: 0.75rem;
-    min-height: 15rem;
-    height: 15rem;
-    resize: vertical;
-    font-size: 1.125rem;
-    border-radius: $rad;
-    border: 2px solid $primary;
-    padding: 0.4rem;
-    font-family: $ff;
-    background-color: $textarea;
-    &:focus {
-        outline: none !important;
-        box-shadow: 0 0 9px $primary;
-    }
+  width: 100%;
+  margin-top: 0.75rem;
+  min-height: 15rem;
+  height: 15rem;
+  resize: vertical;
+  font-size: 1.125rem;
+  border-radius: $rad;
+  border: 2px solid $primary;
+  padding: 0.4rem;
+  font-family: $ff;
+  background-color: $textarea;
+
+  &:focus {
+    outline: none !important;
+    box-shadow: 0 0 9px $primary;
+  }
+}
+
+#example {
+  font-weight: $regular;
+  display: inline-block;
+  color: $primary;
+
+  &:hover {
+    cursor: pointer;
+    color: $primary-hover;
+  }
 }
 
 #output {
-    display: none;
-    margin: 1.5rem 0;
+  display: none;
+  margin: 1.5rem 0;
 }
 
 #elapsed-time {
-    position: relative;
-    top: -1.25rem;
-    right: 1.75rem;
-    color: #999999;
-    font-weight: $light;
-    font-size: 0.95rem;
+  position: relative;
+  top: -1.25rem;
+  right: 1.75rem;
+  color: #999;
+  font-weight: $light;
+  font-size: 0.95rem;
 }
 
 .textarea-label {
-    font-weight: $regular;
+  font-weight: $regular;
 }
 
 #controls {
-    line-height: 1.4;
-    display: flex;
-    align-items: center;
-    margin: 0.75rem 0 0.5rem 0;
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
+  margin: 0.75rem 0 0.5rem 0;
+
+  @media screen and (min-width: 430px) {
+    justify-content: unset;
+
+    #drop > div:first-child {
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: inline;
+    }
+  }
 }
 
 #check {
-    line-height: 1.6;
+  line-height: 1.6;
+
+  @media screen and (min-width: 800px) {
+    line-height: 1.4;
+  }
 }
 
 #drop {
-    margin-left: 2rem;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    align-items: flex-end;
+  margin-left: 2rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: flex-end;
+
+  label {
+    display: block;
+  }
+
+  select {
+    width: 7rem;
+    font-size: 1rem;
+    color: $secondary;
+    text-align: center;
+  }
+
+  @media screen and (min-width: 430px) {
     label {
-        display: block;
+      display: inline;
     }
-    select {
-        width: 7rem;
-    }
-    option,
-    select {
-        font-size: 1rem;
-        color: $secondary;
-        text-align: center;
-    }
+  }
 }
 
 #textOutput {
-    margin-bottom: -1rem;
+  margin-bottom: -1rem;
 }
 
 #summary,
 #elapsed-time {
-    text-align: right;
-    display: block;
-}
-
-// MEDIA QUERIES
-@media screen and (min-width: 430px) {
-    #controls {
-        justify-content: unset;
-    }
-
-    #drop {
-        & > div:first-child {
-            margin-bottom: 1rem;
-        }
-        label {
-            display: inline;
-        }
-    }
+  text-align: right;
+  display: block;
 }
 
 @media screen and (min-width: 800px) {
-    textarea {
-        height: 30vh;
-    }
-    
-    div.bar {
-        margin-bottom: 2rem;
-    }
+  textarea {
+    height: 30vh;
+  }
+  
+  div.bar {
+    margin-bottom: 2rem;
+  }
 
-    #output {
-        margin-top: 0.5rem;
-    }
-
-    #check {
-        line-height: 1.4;
-    }
+  #output {
+    margin-top: 0.5rem;
+  }
 }
